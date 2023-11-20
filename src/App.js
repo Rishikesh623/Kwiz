@@ -1,82 +1,26 @@
-import { useEffect } from "react";
+import React from "react";
+import QuizInstructions from "./components/quiz/QuizInstructions.js";
 import {
-  Routes,
-  Route,
-  useNavigationType,
-  useLocation,
+   BrowserRouter as Router,
+    Route, 
+    Routes
 } from "react-router-dom";
-import Front from "./pages/front";
-import RESULT from "./pages/r-e-s-u-l-t";
-import QuizStart from "./pages/quiz-start";
-import QuizList from "./pages/quiz-list";
-import SignUp from "./pages/sign-up";
-import Login from "./pages/login";
+ import Home from "./components/Home.js" ;
+ import Play from "./components/quiz/Play.js";
+ import QuizSummary from "./components/quiz/QuizSummary.js";
 
-function App() {
-  const action = useNavigationType();
-  const location = useLocation();
-  const pathname = location.pathname;
+function App(){
 
-  useEffect(() => {
-    if (action !== "POP") {
-      window.scrollTo(0, 0);
-    }
-  }, [action, pathname]);
-
-  useEffect(() => {
-    let title = "";
-    let metaDescription = "";
-
-    switch (pathname) {
-      case "/":
-        title = "";
-        metaDescription = "";
-        break;
-      case "/result":
-        title = "";
-        metaDescription = "";
-        break;
-      case "/quiz-start":
-        title = "";
-        metaDescription = "";
-        break;
-      case "/quiz-list":
-        title = "";
-        metaDescription = "";
-        break;
-      case "/sign-up":
-        title = "";
-        metaDescription = "";
-        break;
-      case "/login":
-        title = "";
-        metaDescription = "";
-        break;
-    }
-
-    if (title) {
-      document.title = title;
-    }
-
-    if (metaDescription) {
-      const metaDescriptionTag = document.querySelector(
-        'head > meta[name="description"]'
-      );
-      if (metaDescriptionTag) {
-        metaDescriptionTag.content = metaDescription;
-      }
-    }
-  }, [pathname]);
-
-  return (
-    <Routes>
-      <Route path="/" element={<Front />} />
-      <Route path="/result" element={<RESULT />} />
-      <Route path="/quiz-start" element={<QuizStart />} />
-      <Route path="/quiz-list" element={<QuizList />} />
-      <Route path="/sign-up" element={<SignUp />} />
-      <Route path="/login" element={<Login />} />
-    </Routes>
-  );
+    return(
+        <Router>
+            <Routes> 
+                <Route path="/" exact  Component={Home}/> 
+                <Route path="/play/instructions" exact Component={QuizInstructions}/>
+                <Route path="/play" exact Component={Play}/>
+                <Route path="/play/quizSummary" exact Component={QuizSummary}/>
+                </Routes>
+        </Router>
+    );
 }
+
 export default App;
