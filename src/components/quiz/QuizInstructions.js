@@ -3,9 +3,12 @@ import { Fragment} from "react";
 import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 
-const QuizInstructions=() =>(
+const QuizInstructions=({user}) =>(
 <Fragment>
     <Helmet><title>Quiz instructions- quiz app</title></Helmet>
+    {/* {console.log(user.name)} */}
+    <div className="username container">{user ? user.name : "Guest"}</div>
+
     <div className="instructions container">
         <h1>How to play the game</h1>
         <p>read the instructions carefully</p>

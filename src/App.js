@@ -10,19 +10,22 @@ import {
  import QuizSummary from "./components/quiz/QuizSummary.js";
  import LoginForm from "./components/forms/LoginForm.js";
  import RegForm from "./components/forms/RegForm.js";
+ import { useState } from 'react';
 
 function App(){
-
+    const [ user, setLoginUser] = useState("{}");
     return(
+        
         <Router>
-            <Routes> 
-                <Route path="/" exact  Component={Home}/> 
-                <Route path="/play/instructions" exact Component={QuizInstructions}/>
-                <Route path="/play" exact Component={Play}/>
-                <Route path="/play/quizSummary" exact Component={QuizSummary}/>
-                <Route path="/login" exact Component={LoginForm}/>
-                <Route path="/register" exact Component={RegForm}/>
-                </Routes>
+            <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/play/instructions" element={user && user._id ? <QuizInstructions setLoginUser={setLoginUser} user={user} /> : <QuizInstructions/>} />
+            <Route path="/play" element={<Play />} />
+            <Route path="/play/quizSummary" element={<QuizSummary />} />
+            <Route path="/login" element={<LoginForm setLoginUser={setLoginUser}/>} />
+            <Route path="/register" element={<RegForm />} />
+        </Routes>
+
         </Router>
     );
 }

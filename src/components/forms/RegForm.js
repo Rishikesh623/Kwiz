@@ -1,82 +1,136 @@
 import React, { Fragment,useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
+import character from '../../assets/img/register.jpg'; // Import your background image
+import validator from 'validator';
 
-const RegForm = () => {
+
+function RegForm() {
+
     const navigate = useNavigate();
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirm, setConfirm] = useState("");
+  const [user, setUser] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirm: ''
+  });
 
-    const[allRecords,setAllRecords] = useState([]);
-    
-    const submitForm = (event) => {
-        // Prevent page reload
-        event.preventDefault();
+  const [error, setError] = useState({
+    username: '',
+    email: '',
+    password: '',
+    confirm: ''
+  });
 
-        const newRecord = {username : username,email:email,password:password,confirm:confirm,id:new Date().getTime().toString()};
-        setAllRecords([... allRecords,newRecord]);
+  const[alreadyRegistered,setAlreadyRegistered] = useState('')
 
+  const handleUsernameChange = (event) => {
+    const username = event.target.value;
+    setUser({ ...user, username: username });
+
+    const re = /^\S*$/; // Regex for no whitespace
+    if (username.length < 6 || !re.test(username)) {
+        setError({ ...error, username: "at least 6 characters" });
+    } else {
+        setError({ ...error, username: "" });
     }
+  };
 
-    const PostData =async (event) => {
-            event.preventDefault();
-            const res = await fetch('http://localhost:8080/login',{
-                method: "POST",
-                headers : {
-                    "Content-Type" : "application/json"
-                },
-                body: JSON.stringify({
-                    username,email,password,confirm
-                })
-            });
+  const handleEmailChange = (event) => {
+    const email = event.target.value;
+    setUser({ ...user, email: email });
 
-            const data = await res.json();
-            if(res.status == 422 || !data){
-                window.alert("Invalid Registration");
-                
-            }else{
-                window.alert("Registration Successful.");
-                navigate('/login');
-            }
+    if (!validator.isEmail(email)) {
+        setError({ ...error, email: 'Enter valid Email!' });
+    } else {
+        setError({ ...error, email: "" });
     }
+  };
 
-    return (
-        <Fragment>
+  const handlePasswordChange = (event) => {
+    const password = event.target.value;
+    setUser({ ...user, password: password });
+
+    if (password.length < 8) {
+        setError({ ...error, password: "Password length should be more than 8 characters" });
+    } else {
+        setError({ ...error, password: "" });
+    }
+  };
+
+  const handleConfirmChange = (event) => {
+    const confirm = event.target.value;
+    setUser({ ...user, confirm: confirm });
+
+    if (user.password !== confirm) {
+        setError({ ...error, confirm: "Confirm Password didn't match" });
+    } else {
+        setError({ ...error, confirm: "" });
+    }
+  };
+
+  const register = (event) => {
+    event.preventDefault();
+
+    if (!Object.values(error).some(x => x !== '')) {
+        axios.post("http://localhost:9002/register", user)
+        .then( res => {
+            if(res.data.message === "User already registered")
+                setAlreadyRegistered(res.data.message);
+            else
+                navigate("/login");
+        })
+    }
+  };
+
+  return (
+    <Fragment>
+            {/* {console.log(user)} */}
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"></link>
             <div className="form">
-                <form action="" onSubmit={submitForm} className="form-container">
+                
+                <form action="" className="form-container">
+                    {alreadyRegistered && <div className="Registered">{alreadyRegistered}</div>}
                     <div>
-                        <label><i class="zmdi zmdi-account"></i> </label>
-                        <input type="text" name="username" value={username} placeholder="Enter your name"
-                            onChange={(event) => { setUsername(event.target.value) }}
+                        <label><i className="zmdi zmdi-account"></i> </label>
+                        <input type="text" name="username" value={user.username} placeholder="Enter your name"
+                            onChange={handleUsernameChange}
                             required />
                     </div>
+                        <span className="error">{error.username}</span>
                     <div>
                         <label><i class="zmdi zmdi-mall"></i> </label>
-                        <input type="email" name="email" value={email} placeholder="Enter your email"
-                            onChange={(event) => { setEmail(event.target.value) }}
+                        <input type="email" name="email" value={user.email} placeholder="Enter your email"
+                            onChange={handleEmailChange}
                             required />
                     </div>
+                        <p className="error">{error.email}</p>
                     <div>
                         <label><i class="zmdi zmdi-lock"></i> </label>
-                        <input type="password" name="password" value={password} placeholder="Create a password"
-                            onChange={(event) => { setPassword(event.target.value) }}
+                        <input type="password" name="password" value={user.password} placeholder="Create a password"
+                            onChange={handlePasswordChange}
                             required />
                     </div>
+                        <span className="error">{error.password}</span>
                     <div>
                         <label><i class="zmdi zmdi-lock"></i> </label>
-                        <input type="password" name="confirm" value={confirm} placeholder="Confirm password"
-                            onChange={(event) => { setConfirm(event.target.value) }}
+                        <input type="password" name="confirm" value={user.confirm} placeholder="Confirm password"
+                            onChange={handleConfirmChange}
                             required />
                     </div>
+                        <span className="error">{error.confirm}</span>
                     <div>
-                        <button type="submit" onClick = {PostData}>Register</button>
+                        <button type="submit" onClick = {register}>Register</button>
                     </div>
                 </form>
-                <div>
+
+                <div className="characters">
+                   <figure> <img src={character} alt="Register" /></figure>
+                </div>
+                
+                {/* <div>
                     {
-                        allRecords.map((curElemt) => {
+                        user.map((curElemt) => {
                         return (<div className="showData">
                                 <p>{curElemt.username}</p>
                                 <p>{curElemt.email}</p>
@@ -85,11 +139,10 @@ const RegForm = () => {
                             </div>)
                         })
                     }
-                </div>
+                </div> */}
             </div>
         </Fragment>
-
-    )
+  );
 }
 
 export default RegForm;
