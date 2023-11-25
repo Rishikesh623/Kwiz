@@ -59,6 +59,7 @@ const QuizSummary=()=>{
                         </li>
                     </ul>
                 </section>
+                
                 </Fragment>
                
             );
@@ -81,7 +82,7 @@ const QuizSummary=()=>{
         return(
         <Fragment>
             <Helmet><title>Quiz-app-summary</title></Helmet>
-            <Fragment className="summary">
+            <div className="quiz-summary">
                 <div className="icon-container">
                     <span className="mdi mdi-check-circle-outline success-icon"></span>
                 <h1 className="heading"> quiz has ended</h1>
@@ -105,8 +106,7 @@ const QuizSummary=()=>{
                             <Link className="right" to="/play/quiz">Play Again</Link>
                         
                 </section>
-                </Fragment>
-        </Fragment>       
+</div>        </Fragment>       
          );
     
 };

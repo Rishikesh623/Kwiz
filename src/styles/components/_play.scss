@@ -1,6 +1,6 @@
 .questions{
     background-color: white;
-    border-left: 5px solid blue;
+    border-left: 5px solid  rgba(179, 0, 89, 0.971);
     width: 80%;
     margin: $lg auto 0 auto;
     padding: $sm $md;
@@ -40,9 +40,9 @@ h5{
 
 }
 .option{
-    background-color: blue;
+    background-color: rgba(179, 0, 89, 0.971);
     border-radius: 30px;
-    color: white;
+    color: rgb(255, 255, 255);
     cursor: pointer;
     margin: $md auto;
     transition:0.3s linear all ;
@@ -52,7 +52,7 @@ h5{
 }
 
 .option:hover{
-    background-color: darken($color: blue, $amount: 50%);
+    background-color: darken($color: rgba(179, 0, 89, 0.971), $amount: 50%);
 }
 .button-container{
     display: flex;

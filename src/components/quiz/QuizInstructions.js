@@ -10,12 +10,12 @@ const QuizInstructions=({user}) =>(
     <div className="username container">{user ? user.name : "Guest"}</div>
 
     <div className="instructions container">
-        <h1>How to play the game</h1>
-        <p>read the instructions carefully</p>
+        <h1>How to attemp this quiz</h1>
+        <p>Read the instructions carefully</p>
         <ul>
-            <li>xjdjkmhugkuggkugkg</li>
-            <li>hxhdcjgncdjhyfyj</li>
-            <li>hgxdtdydikyfkuhgujhfuydeytey5te</li>
+            <li>There will be 15 questions</li>
+            <li>You will get 3 minutes to complete the quiz</li>
+            <li>Try to score as much as possibke</li>
         </ul>
         <div>
             <span className="left"> <Link to='/'>No take me back</Link> </span>
