@@ -1,0 +1,160 @@
+.kwizapp{
+  width: fit-content;
+  font-size: 24px;
+  font-weight: bold;
+  color: #216DBF;
+  border: 2px solid #216DBF;
+  padding: 2px;
+  border-radius: 4px;
+}
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #216DBF;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.result-page {
+  /* border: 5px solid #216DBF; */
+  /* color: #216DBF; */
+  border-radius: 11px ;
+  /* margin: auto auto; */
+  margin-top: 20px;
+}
+.result-box {
+  border: 3px solid #216DBF;
+  border-radius: 5px ;
+  margin-bottom: 6px;
+}
+.result-options {
+  margin-left: 12px;;
+}
+.custom-navbar {
+  background-color: #FFC0CB; /* Light pink color */
+}
+/* https://goodpalette.io/216dbf-d119ce-c2c7cc  || color pallete */
+
+
+.list-group a:hover{
+  background-color: #216DBF;
+  color: aliceblue;
+  cursor: pointer;
+}
+.list-group a:hover{
+  background-color: #216DBF;
+  color: aliceblue;
+  cursor: pointer;
+}
+.home-board {
+  background-color: #216DBF;
+  border: none;
+}
+.main-bg-dark {
+  background-color: #216DBF;
+}
+.main-bg-light {
+  background-color: #f0f8ff;
+}
+
+/* Add this CSS to your stylesheet */
+.form-container {
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+}
+
+.form-container h2 {
+    color: #216DBF;
+    text-align: center;
+}
+
+.form-container hr {
+    border: 1px solid #216DBF;
+}
+
+.form-container .form-control {
+    border: 1px solid #216DBF;
+    border-radius: 5px;
+}
+
+.form-container .btn-primary {
+    background-color: #216DBF;
+    border: none;
+}
+
+.form-container .alert-danger {
+    border: 1px solid #ff0000;
+    border-radius: 5px;
+    background-color: #ffe6e6;
+    color: #ff0000;
+}
+.dropdown-toggle {   
+  overflow: hidden;
+  padding-right: 24px /* Optional for caret */;
+  text-align: left;
+  text-overflow: ellipsis;    
+  width: 100%;
+}
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background-color: #0B5899; /* You can change the color */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 50px;
+  font-weight: bold;
+}
+/* styles.css */
+.custom-sidebar {
+  margin: 0;
+  padding: 0;
+  /* Add any other custom styles you need */
+}
+
+/* styles.css */
+.quiz-leftbar {
+  height: 100vh; /* Set the height to 100% of the viewport height */
+  /* Add any other custom styles you need */
+}
+.question-card{
+  height: 100vh;
+}
+.white-text {
+  color: white;
+  text-decoration: none;
+}
